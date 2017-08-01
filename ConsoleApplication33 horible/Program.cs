@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApplication33_horible
 {
@@ -50,31 +46,34 @@ namespace ConsoleApplication33_horible
             }
 
         }
-
+        static void getStartingInput(out long N, out long C)
+        {
+            string[] s_input = Console.ReadLine().Split(' ');
+            N = long.Parse(s_input[0]);
+            C = long.Parse(s_input[1]);
+        }
         static void Main(string[] args)
         {
+            long T = long.Parse(Console.ReadLine());
 
-            long N = 8 + 1; // this N is given in input. <-- length of initial array.
-            long C = 6; // this C is given in input. <-- number of commands. 
-            long[] initialArray = new long[N]; 
-            long beginIndex, endIndex, nToAdd = 0;
-            for(int i = 0; i < C; i++)
+            for (long j = 0; j < T; j++)
             {
-                if(getInputAndInform(out beginIndex, out endIndex, out nToAdd))
+                long beginIndex, endIndex, nToAdd, N, C = 0;
+                getStartingInput(out N, out C);
+                long[] initialArray = new long[N + 1];
+                for (int i = 0; i < C; i++)
                 {
-                    addInRange(initialArray, beginIndex, endIndex, nToAdd);
-                    
-                }
-                else
-                {
-                    Console.WriteLine(getConstrainedSum(initialArray, beginIndex, endIndex)); 
+                    if (getInputAndInform(out beginIndex, out endIndex, out nToAdd))
+                    {
+                        addInRange(initialArray, beginIndex, endIndex, nToAdd);
+
+                    }
+                    else
+                    {
+                        Console.WriteLine(getConstrainedSum(initialArray, beginIndex, endIndex));
+                    }
                 }
             }
-         
-            Console.ReadKey();
-
-            //Console.WriteLine("beginIndex: {0}, endIndex: {1}, nToAdd: {2}"
-            //    ,beginIndex,endIndex,nToAdd);
         }
     }
 }
